@@ -1,0 +1,53 @@
+<html>
+    <body>
+      <div class="container fluid">
+        <h1 style="color:black;font-style: italic;margin-left: 50%;font-size: xx-large;">YouFrame</h1>
+      </div>
+        <div style="padding-top: 3vw;;">
+          <form method="POST" action="/gallery/" class="form-inline" enctype="multipart/form-data">
+            <input type = "file" name = "file" style="display: inline;"/>
+            <button type="submit" value="upload" style="width:8%;" >
+              <span style = "display: inline;" ><img src="/static/upload.svg" style="height: 15%; width: 15%; padding-right: 10px;"></span>
+              <span style="display: inline;" >upload</span>
+            </button>
+          </form>
+        </div>
+
+        
+          <hr>
+          <div id="gallery" class="container-fluid" style="margin-left:18%; margin-right: 8%;"> 
+          {% for image in gallery %}
+          <img src="/static/gallery/{{ image }}" class="card img-responsive " style="height: 300px;width:300px;display: inline;">
+          {% endfor %}
+          
+          
+          
+          </div>
+          <div id="myModal" class="modal" role="dialog">
+            <div class="modal-dialog">
+          
+              <!-- Modal content-->
+              <div class="modal-content">
+                <div class="modal-body">
+                </div>
+              </div>
+            </div>
+          </div>
+          <script>
+              $(document).ready(function(){
+                  $("img").click(function(){
+                  var t = $(this).attr("src");
+                  $(".modal-body").html("<img src='"+t+"' class='modal-img'>");
+                  $("#myModal").modal();
+                });
+                
+                $("video").click(function(){
+                  var v = $("video > source");
+                  var t = v.attr("src");
+                  $(".modal-body").html("<video class='model-vid' controls><source src='"+t+"' type='video/mp4'></source></video>");
+                  $("#myModal").modal();  
+                });
+                });//EOF Document.ready
+          </script>
+    </body>
+</html>
